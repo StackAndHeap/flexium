@@ -31,9 +31,8 @@ public class Flexium extends Sprite {
         application.removeEventListener(FlexEvent.APPLICATION_COMPLETE, applicationCompleteHandler);
         appParser = new AppParser(application.getChildAt(0));
         appParser.setTooltipsToID();
-        _actions = new Actions(appParser);
-
         injectJavaScript();
+        _actions = new Actions(appParser);
 
     }
 

@@ -8,6 +8,7 @@ import com.sparkTree.Tree;
 import com.sparkTree.TreeDataProvider;
 
 import flash.events.MouseEvent;
+import flash.external.ExternalInterface;
 
 import mx.core.mx_internal;
 
@@ -31,6 +32,7 @@ public class MouseAction implements IAction {
     }
 
     public function attachActions():void {
+        ExternalInterface.addCallback("doFlexClick", doFlexClick);
     }
 
     public function doFlexClick(id:String, args:String):String {
