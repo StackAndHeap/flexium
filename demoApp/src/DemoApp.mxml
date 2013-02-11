@@ -2,6 +2,7 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" creationComplete="creationCompleteHandler(event)" xmlns:s="library://ns.adobe.com/flex/spark">
     <fx:Script><![CDATA[
         import be.stackandheap.flexium.Flexium;
+        import be.stackandheap.flexium.FlexiumSocket;
 
         import mx.controls.Alert;
         import mx.events.FlexEvent;
@@ -33,6 +34,10 @@
 
         private function creationCompleteHandler(event:FlexEvent):void {
             initDataGrid();
+
+            var socket = new FlexiumSocket("localhost", 1234);
+
+
         }
 
         private function initDataGrid():void {
