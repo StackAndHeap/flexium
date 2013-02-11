@@ -60,10 +60,7 @@ public class FlexiumLink extends FlashSelenium {
     }
 
     private static Boolean checkResult(String result) {
-        if(result.equals("true")) {
-            return true;
-        }
-        return false;
+        return result.equals("true");
     }
 
     private void delay() {

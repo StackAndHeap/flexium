@@ -1,8 +1,8 @@
-import be.stackandheap.flexSeleniumLink.FlexSeleniumLink;
 import be.stackandheap.flexiumLink.FlexiumLink;
 import com.thoughtworks.selenium.DefaultSelenium;
 import com.thoughtworks.selenium.Selenium;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.server.SeleniumServer;
@@ -41,11 +41,13 @@ public class DemoAppTest {
     }
 
     @Test
-    public void verifyPageTitle() throws Exception {
-
-        flexSelenium.click("button");
-
-
+    public void basicTests() throws Exception {
+        Assert.assertEquals("DemoApp", selenium.getTitle());
+        Assert.assertTrue("Can't type in testInput", flexSelenium.type("textInput", "TEST"));
+        Assert.assertTrue("Can't click Button", flexSelenium.click("button"));
+        Assert.assertTrue("Can't close Alert", flexSelenium.closeAlertByLabel("OK"));
+        Assert.assertTrue("Can't select item", flexSelenium.select("list", "B"));
+        Assert.assertTrue("Can't double click", flexSelenium.dataGridDoubleClick("datagrid", "ID", "1"));
     }
 
 

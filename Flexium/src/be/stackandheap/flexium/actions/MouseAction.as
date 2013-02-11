@@ -8,31 +8,24 @@ import com.sparkTree.Tree;
 import com.sparkTree.TreeDataProvider;
 
 import flash.events.MouseEvent;
-import flash.external.ExternalInterface;
 
 import mx.core.mx_internal;
 
+import spark.components.DataGrid;
 import spark.components.List;
+import spark.components.gridClasses.GridColumn;
+import spark.events.GridEvent;
 
 use namespace mx_internal;
 
-public class MouseAction implements IAction {
-    private var _parser:AppParser;
-
+public class MouseAction extends AbstractAction implements IAction {
     public function MouseAction(parser:AppParser) {
-        this.parser = parser
-    }
-
-    public function get parser():AppParser {
-        return _parser;
-    }
-
-    public function set parser(value:AppParser):void {
-        _parser = value;
+        super(parser);
     }
 
     public function attachActions():void {
-        ExternalInterface.addCallback("doFlexClick", doFlexClick);
+        attach("doFlexClick", doFlexClick);
+        attach("doFlexDoubleClick", doFlexDoubleClick);
     }
 
     public function doFlexClick(id:String, args:String):String {
@@ -60,6 +53,24 @@ public class MouseAction implements IAction {
         return Errors.OBJECT_NOT_COMPATIBLE;
     }
 
+    public function doFlexDoubleClick(id:String, args:String):String {
+        var child:Object = parser.getElement(id);
+
+        if (child == null) {
+            return Errors.OBJECT_NOT_FOUND;
+        }
+
+        if (child.hasOwnProperty("doubleClickEnabled") && child.doubleClickEnabled) {
+            // check if child is a spark datagrid
+            if (child is DataGrid) {
+                return doubleClickItemInDataGrid(child as DataGrid, args);
+            }
+
+            return String(child.dispatchEvent(new MouseEvent(MouseEvent.DOUBLE_CLICK)));
+        }
+        return Errors.OBJECT_NOT_COMPATIBLE;
+    }
+
     private static function clickSparkTree(tree:Tree, selectItemLabel:String):String {
         for each (var item:* in (tree.dataProvider as TreeDataProvider).dataProvider) {
             if (tree.itemToLabel(item) == selectItemLabel) {
@@ -78,6 +89,34 @@ public class MouseAction implements IAction {
             }
         }
         return "false";
+    }
+
+    private static function doubleClickItemInDataGrid(grid:DataGrid, args:String):String {
+        var argsArray:Array = args.split("||");
+        var colHeader:String = argsArray[0];
+        var itemLabel:String = argsArray[1];
+        var selectedColumn:GridColumn;
+
+        for each (var column:GridColumn in grid.columns.toArray()) {
+            if (column.headerText == colHeader) {
+                selectedColumn = column;
+                break;
+            }
+        }
+
+        if (selectedColumn) {
+            for each (var item:Object in grid.dataProvider) {
+                if (selectedColumn.itemToLabel(item) == itemLabel) {
+                    grid.setSelectedIndex(grid.dataProvider.getItemIndex(item));
+                    var event:GridEvent = new GridEvent(GridEvent.GRID_DOUBLE_CLICK);
+                    event.item = item;
+                    event.column = selectedColumn;
+                    event.columnIndex = grid.columns.getItemIndex(selectedColumn);
+                    return String(grid.dispatchEvent(event));
+                }
+            }
+        }
+        return Errors.OBJECT_NOT_COMPATIBLE;
     }
 }
 }

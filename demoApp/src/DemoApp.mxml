@@ -1,10 +1,85 @@
 <?xml version="1.0"?>
-<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark">
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" creationComplete="creationCompleteHandler(event)" xmlns:s="library://ns.adobe.com/flex/spark">
     <fx:Script><![CDATA[
-        import mx.controls.Alert;
         import be.stackandheap.flexium.Flexium;
 
-        private var flexium:Flexium;
+        import mx.controls.Alert;
+        import mx.events.FlexEvent;
+
+        import spark.events.GridEvent;
+
+        import spark.events.IndexChangeEvent;
+
+        import spark.events.TextOperationEvent;
+
+        private var _flexium:Flexium;
+
+        private function textInput_changeHandler(event:TextOperationEvent):void {
+            button.label = textInput.text;
+        }
+
+        private static function showAlert():void {
+            Alert.show('Hello, world', 'hey');
+        }
+
+        private function list_changeHandler(event:IndexChangeEvent):void {
+            textInput.text = list.selectedItem.toString();
+        }
+
+        private static function fullNameLabelFunction(data:Object, col:GridColumn):String {
+
+            return data.firstName + " " + data.surName;
+        }
+
+        private function creationCompleteHandler(event:FlexEvent):void {
+            initDataGrid();
+        }
+
+        private function initDataGrid():void {
+            var collection:ArrayCollection = new ArrayCollection();
+            var obj:Object = {};
+            obj.id = 1;
+            obj.firstName = "Gert";
+            obj.surName = "Poppe";
+            collection.addItem(obj);
+            var obj1:Object = {};
+            obj1.id = 2;
+            obj1.firstName = "Pieter";
+            obj1.surName = "Willaert";
+            collection.addItem(obj1);
+            datagrid.dataProvider = collection;
+            trace(datagrid);
+        }
+
+        private static function datagrid_doubleClickHandler(event:GridEvent):void {
+            Alert.show(event.item.firstName);
+        }
         ]]></fx:Script>
-    <s:Button click="Alert.show('Hello, world')" id="button" label="Say Hello"/>
+
+    <s:VGroup>
+        <s:Button click="{showAlert()}" id="button" label="Say Hello"/>
+
+        <s:TextInput id="textInput" visible="true" enabled="true" change="textInput_changeHandler(event)" editable="true"/>
+
+        <s:List id="list" change="list_changeHandler(event)">
+            <s:dataProvider>
+                <s:ArrayCollection>
+                    <fx:String>A</fx:String>
+                    <fx:String>B</fx:String>
+                    <fx:String>C</fx:String>
+                </s:ArrayCollection>
+            </s:dataProvider>
+        </s:List>
+
+        <s:DataGrid id="datagrid" width="300" height="150" doubleClickEnabled="true" gridDoubleClick="datagrid_doubleClickHandler(event)">
+            <s:columns>
+                <s:ArrayCollection>
+                    <s:GridColumn headerText="ID"
+                                  dataField="id" />
+                    <s:GridColumn headerText="Full name"
+                                  labelFunction="fullNameLabelFunction" />
+                </s:ArrayCollection>
+            </s:columns>
+        </s:DataGrid>
+    </s:VGroup>
 </s:Application>
