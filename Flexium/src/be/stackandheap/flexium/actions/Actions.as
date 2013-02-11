@@ -17,6 +17,7 @@ public class Actions {
         actionClasses.push(new KeyboardAction(parser));
         actionClasses.push(new PopupAction(parser));
         actionClasses.push(new ApplicationAction(parser));
+        actionClasses.push(new ComponentAction(parser));
     }
 
     private function attachActions():void {

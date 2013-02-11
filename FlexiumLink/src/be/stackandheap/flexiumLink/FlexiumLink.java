@@ -13,7 +13,7 @@ public class FlexiumLink extends FlashSelenium {
         super(selenium, flashObjectId);
     }
 
-    public Boolean click(String objectId) {
+    public Boolean click(String objectId) throws Exception {
         delay();
         if(isReady()) {
             String result = call("doFlexClick", objectId, "");
@@ -22,7 +22,7 @@ public class FlexiumLink extends FlashSelenium {
         return false;
     }
 
-    public Boolean dataGridDoubleClick(String objectId, String headerLabel, String itemLabel) {
+    public Boolean dataGridDoubleClick(String objectId, String headerLabel, String itemLabel) throws Exception {
         delay();
         if(isReady()) {
             String result = call("doFlexDoubleClick", objectId, headerLabel + "||" + itemLabel);
@@ -32,7 +32,7 @@ public class FlexiumLink extends FlashSelenium {
         return false;
     }
 
-    public Boolean select(String objectId, String itemLabel) {
+    public Boolean select(String objectId, String itemLabel) throws Exception {
         delay();
         if(isReady()) {
             String result = call("doFlexClick", objectId, itemLabel);
@@ -41,7 +41,7 @@ public class FlexiumLink extends FlashSelenium {
         return false;
     }
 
-    public Boolean type(String objectId, String value) {
+    public Boolean type(String objectId, String value) throws Exception {
         delay();
         if(isReady()) {
             String result = call("doFlexType", objectId, value);
@@ -50,7 +50,16 @@ public class FlexiumLink extends FlashSelenium {
         return false;
     }
 
-    public Boolean closeAlertByLabel(String label) {
+    public boolean isVisible(String objectId) throws Exception {
+        delay();
+        if(isReady()) {
+            String result = call("isVisible", objectId);
+            return checkResult(result);
+        }
+        return false;
+    }
+
+    public Boolean closeAlertByLabel(String label) throws Exception {
         delay();
         if(isReady()) {
             String result = call("doFlexCloseAlert", label);
@@ -59,7 +68,10 @@ public class FlexiumLink extends FlashSelenium {
         return false;
     }
 
-    private static Boolean checkResult(String result) {
+    private static Boolean checkResult(String result) throws Exception{
+        if(!result.equals("true") && !result.equals("false")) {
+            throw new Exception(result);
+        }
         return result.equals("true");
     }
 

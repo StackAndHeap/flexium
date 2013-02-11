@@ -59,6 +59,8 @@
     <s:VGroup>
         <s:Button click="{showAlert()}" id="button" label="Say Hello"/>
 
+        <s:Button id="invisibleButton" visible="false" label="Say Hello"/>
+
         <s:TextInput id="textInput" visible="true" enabled="true" change="textInput_changeHandler(event)" editable="true"/>
 
         <s:List id="list" change="list_changeHandler(event)">

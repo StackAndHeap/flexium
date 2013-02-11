@@ -34,7 +34,7 @@ public class DemoAppTest {
 
     @After
     public void tearDown() throws Exception {
-        Thread.sleep(5000);
+        Thread.sleep(4000);
 
         selenium.stop();
         _server.stop();
@@ -42,12 +42,13 @@ public class DemoAppTest {
 
     @Test
     public void basicTests() throws Exception {
-        Assert.assertEquals("DemoApp", selenium.getTitle());
-        Assert.assertTrue("Can't type in testInput", flexSelenium.type("textInput", "TEST"));
-        Assert.assertTrue("Can't click Button", flexSelenium.click("button"));
-        Assert.assertTrue("Can't close Alert", flexSelenium.closeAlertByLabel("OK"));
-        Assert.assertTrue("Can't select item", flexSelenium.select("list", "B"));
-        Assert.assertTrue("Can't double click", flexSelenium.dataGridDoubleClick("datagrid", "ID", "1"));
+        flexSelenium.type("textInput", "TEST");
+        flexSelenium.click("button");
+        flexSelenium.closeAlertByLabel("OK");
+        Assert.assertTrue(flexSelenium.isVisible("button"));
+        Assert.assertFalse(flexSelenium.isVisible("invisibleButton"));
+        flexSelenium.select("list", "B");
+        flexSelenium.dataGridDoubleClick("datagrid", "ID", "1");
     }
 
 
