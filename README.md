@@ -7,17 +7,18 @@ Flexium is a work in progress, only having basic functionality (yet).
 How does it work?
 =======
 
-Flexium API consists out of 2 parts.<br/><br/>
+Flexium API consists out of 2 parts.<br/>
 
 The first part is the Apache Flex-library, named <b>Flexium.swc</b>.<br/>
 This file needs to be compiled into your Flex application. You can do this by adding <i>include-libraries Flexium.swc</i>
-as a compiler option or adding a reference to the Flexium-class in your code.<br/><br/>
+as a compiler option or adding a reference to the Flexium-class in your code.<br/>
 
 The second part is a jar-file, named <b>FlexiumLink.jar</b>.<br/>
 This file extends the FlexiumLink-class. FlexiumLink extends [flash-selenium](http://code.google.com/p/flash-selenium/) and
-takes care off all the communication between your tests and the application.<br/><br/>
+takes care off all the communication between your tests and the application.<br/>
 
-Your Java test class looks like this:<br/>
+Your Java test class looks like this:
+
     public class DemoAppTest {
         private final static String BASE_URL = "http://localhost/";
         private final static String PAGE = "flexiumDemo/DemoApp.html";
