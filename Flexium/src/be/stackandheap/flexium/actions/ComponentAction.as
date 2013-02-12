@@ -1,6 +1,10 @@
 package be.stackandheap.flexium.actions {
 import be.stackandheap.flexium.parser.AppParser;
 import be.stackandheap.flexium.utils.Errors;
+import be.stackandheap.flexium.utils.References;
+import be.stackandheap.flexium.utils.Utils;
+
+import spark.components.List;
 
 public class ComponentAction extends AbstractAction implements IAction {
     public function ComponentAction(parser:AppParser) {
@@ -32,7 +36,7 @@ public class ComponentAction extends AbstractAction implements IAction {
         return Errors.OBJECT_NOT_COMPATIBLE;
     }
 
-    private function sparkListHasItem(list:List, label:String):String {
+    private static function sparkListHasItem(list:List, label:String):String {
         for each (var item:Object in list.dataProvider) {
             if (list.itemToLabel(item) == label) {
                 return "true";
