@@ -7,7 +7,7 @@ Flexium is a work in progress, only having basic functionality (yet).
 How does it work?
 =======
 
-Flexium API consists out of 2 parts.<br/>
+Download the <b>FlexiumAPI.zip</b> file. The Flexium API consists out of 2 parts.<br/>
 
 The first part is the Apache Flex-library, named <b>Flexium.swc</b>.<br/>
 This file needs to be compiled into your Flex application. You can do this by adding <i>include-libraries Flexium.swc</i>
