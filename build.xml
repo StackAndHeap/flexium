@@ -1,0 +1,12 @@
+<project name="Flexium API" default="zip" basedir=".">
+    <target name="clean">
+        <delete file="FlexiumAPI.zip"/>
+    </target>
+    <target name="zip" depends="clean">
+        <zip destfile="FlexiumAPI.zip">
+            <zipfileset dir="Flexium/output" prefix="Flexium"/>
+            <zipfileset dir="FlexiumLink/output" prefix="FlexiumLink"/>
+            <zipfileset dir="." includes="README.md"/>
+        </zip>
+    </target>
+</project>
