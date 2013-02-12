@@ -23,15 +23,15 @@ public class ComponentAction extends AbstractAction implements IAction {
             return Errors.OBJECT_NOT_FOUND;
         }
     }
-    public function hasElement(id:String, label:String):String {
+    public function hasItem(id:String, label:String):String {
         var child:Object = parser.getElement(id);
         if (Utils.isA(child, References.LIST_DESCRIPTION)) {
-            return sparkListHasElement(child as List, label);
+            return sparkListHasItem(child as List, label);
         }
         return Errors.OBJECT_NOT_COMPATIBLE;
     }
 
-    private function sparkListHasElement(list:List, label:String):String {
+    private function sparkListHasItem(list:List, label:String):String {
         for each (var item:Object in list.dataProvider) {
             if (list.itemToLabel(item) == label) {
                 return "true";
