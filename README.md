@@ -1,4 +1,4 @@
-Flexium API - Automated testing for Apache Flex and Selenium
+Flexium API - Automated testing for [Apache Flex](http://flex.apache.org) and Selenium
 =======
 
 Flexium is a tool used for building automated [Selenium](http://seleniumhq.org/) tests.<br/>
