@@ -10,7 +10,7 @@ How does it work?
 Download the <b>FlexiumAPI.zip</b> file. The Flexium API consists out of 2 parts.<br/>
 
 The first part is the Apache Flex-library, named <b>Flexium.swc</b>.<br/>
-This file needs to be compiled into your Flex application. You can do this by adding <i>include-libraries Flexium.swc</i>
+The only thing you need to do is to compile this swc into your Flex application. You can do this by adding <i>include-libraries Flexium.swc</i>
 as a compiler option or adding a reference to the Flexium-class in your code.<br/>
 
 The second part is a jar-file, named <b>FlexiumLink.jar</b>.<br/>
