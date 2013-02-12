@@ -8,8 +8,8 @@ public class ComponentAction extends AbstractAction implements IAction {
     }
 
     public function attachActions():void {
-        attach("isVisible",isVisible);
         attach("hasItem",hasItem);
+        attach("isVisible",isVisible);
     }
 
     public function isVisible(id:String):String {
