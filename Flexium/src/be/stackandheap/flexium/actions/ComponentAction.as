@@ -8,6 +8,7 @@ public class ComponentAction extends AbstractAction implements IAction {
     }
 
     public function attachActions():void {
+        attach("hasItem",hasItem);
         attach("isVisible",isVisible);
     }
 
@@ -22,6 +23,22 @@ public class ComponentAction extends AbstractAction implements IAction {
         } else {
             return Errors.OBJECT_NOT_FOUND;
         }
+    }
+    public function hasItem(id:String, label:String):String {
+        var child:Object = parser.getElement(id);
+        if (Utils.isA(child, References.LIST_DESCRIPTION)) {
+            return sparkListHasItem(child as List, label);
+        }
+        return Errors.OBJECT_NOT_COMPATIBLE;
+    }
+
+    private function sparkListHasItem(list:List, label:String):String {
+        for each (var item:Object in list.dataProvider) {
+            if (list.itemToLabel(item) == label) {
+                return "true";
+            }
+        }
+        return "false";
     }
 }
 }
