@@ -1,12 +1,21 @@
 <project name="Flexium API" default="zip" basedir=".">
+
     <target name="clean">
         <delete file="FlexiumAPI.zip"/>
     </target>
-    <target name="zip" depends="clean">
+
+    <target name="javadoc" depends="clean">
+        <javadoc sourcefiles="FlexiumLink/src/be/stackandheap/flexiumLink/FlexiumLink.java"
+                 destdir="FlexiumLink/javadoc"/>
+    </target>
+
+    <target name="zip" depends="javadoc">
         <zip destfile="FlexiumAPI.zip">
             <zipfileset dir="Flexium/output" prefix="Flexium"/>
             <zipfileset dir="FlexiumLink/output" prefix="FlexiumLink"/>
+            <zipfileset dir="FlexiumLink/javadoc" prefix="FlexiumLink/docs"/>
             <zipfileset dir="." includes="README.md"/>
         </zip>
     </target>
+
 </project>
