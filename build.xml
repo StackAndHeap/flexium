@@ -1,7 +1,10 @@
 <project name="Flexium API" default="zip" basedir=".">
 
+    <property environment="system"/>
+
     <target name="clean">
         <delete file="FlexiumAPI.zip"/>
+        <delete dir="FlexiumLink/javadoc"/>
     </target>
 
     <target name="javadoc" depends="clean">

@@ -13,6 +13,7 @@ public class ComponentAction extends AbstractAction implements IAction {
 
     public function attachActions():void {
         attach("hasItem",hasItem);
+        attach("hasItems",hasItems);
         attach("isVisible",isVisible);
     }
 
@@ -28,6 +29,20 @@ public class ComponentAction extends AbstractAction implements IAction {
             return Errors.OBJECT_NOT_FOUND;
         }
     }
+
+    public function hasItems(id:String):String {
+        var child:Object = parser.getElement(id);
+        if(child) {
+            if(child.hasOwnProperty("dataProvider")) {
+                if(child.dataProvider && child.dataProvider.length > 0) {
+                    return "true";
+                }
+            }
+            return "false";
+        }
+        return Errors.OBJECT_NOT_FOUND;
+    }
+
     public function hasItem(id:String, label:String):String {
         var child:Object = parser.getElement(id);
         if (Utils.isA(child, References.LIST_DESCRIPTION)) {

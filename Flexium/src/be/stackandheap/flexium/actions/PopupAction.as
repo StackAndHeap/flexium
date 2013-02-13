@@ -8,6 +8,7 @@ import mx.controls.Button;
 import mx.core.FlexGlobals;
 import mx.core.mx_internal;
 
+
 use namespace mx_internal;
 
 public class PopupAction extends AbstractAction implements IAction {
@@ -17,6 +18,15 @@ public class PopupAction extends AbstractAction implements IAction {
 
     public function attachActions():void {
         attach("doFlexCloseAlert",doFlexCloseAlert);
+        attach("alertVisible",alertVisible);
+    }
+
+    public static function alertVisible():String {
+        var alert:Alert = findAlertInNode(FlexGlobals.topLevelApplication.parent);
+        if(!alert) {
+            return "false";
+        }
+        return "true";
     }
 
     public static function doFlexCloseAlert(buttonLabel:String):String {

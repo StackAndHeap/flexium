@@ -287,51 +287,7 @@ package be.stackandheap.flexium.parser
 //			}
 			return false;
 		}
-		
 
-		public function setTooltipsToID():void
-		{
-			var parents:Array = [];
-			var currentNode:AppNode = new AppNode(thisApp.parent);
-			var sibTravers:Boolean = false;
-
-			do
-			{
-				if(hasFirstChild(currentNode) && ! sibTravers)
-				{
-					parents.push(currentNode);
-					currentNode = firstNode;
-					assignID(currentNode.child);
-				}
-				else if(hasNextNode(currentNode, parents[parents.length - 1].child))
-				{
-					currentNode = nextNode;
-					assignID(currentNode.child);
-					sibTravers = false;
-				}
-				else
-				{
-					currentNode = parents.pop();
-					sibTravers = true;
-				}
-			} while(currentNode.child != thisApp.parent);
-			
-			parents = null;
-		}
-
-		private static function assignID(node:Object):void
-		{
-			if(node.hasOwnProperty("id") && node.hasOwnProperty("toolTip"))
-			{
-				if(node.id == null)
-				{
-					trace(node.toString().match("\\w+$")[0]);
-					node.id = node.toString().match("\\w+$")[0];
-				}
-				node.toolTip = node.id;
-			}
-		}
-		
 		/**
 		 * Find a UIComponent using its id attribute, wherever it is in the application
 		 * @param  id  id attribute of the UIComponent to return

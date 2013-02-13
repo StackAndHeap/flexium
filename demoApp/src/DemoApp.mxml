@@ -54,6 +54,8 @@
         private static function datagrid_doubleClickHandler(event:GridEvent):void {
             Alert.show(event.item.firstName);
         }
+
+
         ]]></fx:Script>
 
     <s:VGroup>

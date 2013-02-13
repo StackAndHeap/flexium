@@ -122,6 +122,37 @@ public class FlexiumLink extends FlashSelenium {
     }
 
     /**
+     * Checks if the dataProvider of an object in the application contains items. This function takes into account the delay() and isReady() methods.
+     *
+     * @param objectId String
+     * @return Boolean
+     * @throws Exception
+     */
+    public Boolean hasItems(String objectId) throws Exception {
+        delay();
+        if(isReady()) {
+            String result = call("hasItems", objectId);
+            return checkResult(result);
+        }
+        return false;
+    }
+
+    /**
+     * Checks if there's an alert shown in the application. This function takes into account the delay() and isReady() methods.
+     *
+     * @return Boolean
+     * @throws Exception
+     */
+    public boolean alertVisible() throws Exception {
+        delay();
+        if(isReady()) {
+            String result = call("alertVisible");
+            return checkResult(result);
+        }
+        return false;
+    }
+
+    /**
      * Closes an Alert by clicking the label of the alerts buttons. This function takes into account the delay() and isReady() methods.
      *
      * @param label String

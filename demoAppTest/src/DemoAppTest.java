@@ -28,13 +28,11 @@ public class DemoAppTest {
         Thread.sleep(5000);
 
         flexSelenium = new FlexiumLink(selenium, "DemoApp");
-        flexSelenium.applyDelay = false;
-        flexSelenium.checkIfReady = false;
     }
 
     @After
     public void tearDown() throws Exception {
-        Thread.sleep(4000);
+        Thread.sleep(5000);
 
         selenium.stop();
         _server.stop();
@@ -48,7 +46,9 @@ public class DemoAppTest {
         Assert.assertTrue(flexSelenium.isVisible("button"));
         Assert.assertFalse(flexSelenium.isVisible("invisibleButton"));
         flexSelenium.select("list", "B");
+        Assert.assertTrue(flexSelenium.hasItems("datagrid"));
         flexSelenium.dataGridDoubleClick("datagrid", "ID", "1");
+        Assert.assertTrue(flexSelenium.alertVisible());
     }
 
 
