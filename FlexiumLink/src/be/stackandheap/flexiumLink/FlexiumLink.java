@@ -122,6 +122,28 @@ public class FlexiumLink extends FlashSelenium {
     }
 
     /**
+     * Wait's until an object is visible. Makes a call using the interval, takes the maxDelay into account.
+     * @param objectId String
+     * @return Boolean
+     * @throws Exception
+     */
+    public boolean waitUntilVisible(String objectId) throws Exception {
+        for (int i = 0; i < Math.round(maxDelay / interval); i++) {
+            String result = call("isVisible", objectId);
+            if(result.equals("true")) {
+                return true;
+            }
+            try {
+                Thread.sleep(interval);
+            }catch (Exception ex) {
+                return false;
+            }
+        }
+
+        throw new Exception("Can't find element");
+    }
+
+    /**
      * Checks if the dataProvider of an object in the application contains items. This function takes into account the delay() and isReady() methods.
      *
      * @param objectId String
