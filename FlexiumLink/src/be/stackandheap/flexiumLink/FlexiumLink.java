@@ -106,6 +106,23 @@ public class FlexiumLink extends FlashSelenium {
     }
 
     /**
+     * Checks if an object has an item in his dataprovider. This function takes into account the delay() and isReady() methods.
+     *
+     * @param objectId String
+     * @param itemLabel String
+     * @return Boolean
+     * @throws Exception
+     */
+    public Boolean hasElementByLabel(String objectId, String itemLabel) throws Exception {
+        delay();
+        if(isReady()) {
+            String result = call("hasElementByLabel", objectId, itemLabel);
+            return checkResult(result);
+        }
+        return false;
+    }
+
+    /**
      * Types the value into the text-property of the object. This function takes into account the delay() and isReady() methods.
      *
      * @param objectId String

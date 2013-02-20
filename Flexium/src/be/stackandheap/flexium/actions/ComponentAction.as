@@ -4,6 +4,8 @@ import be.stackandheap.flexium.utils.Errors;
 import be.stackandheap.flexium.utils.References;
 import be.stackandheap.flexium.utils.Utils;
 
+import flash.sampler.NewObjectSample;
+
 import spark.components.List;
 
 public class ComponentAction extends AbstractAction implements IAction {
@@ -15,6 +17,7 @@ public class ComponentAction extends AbstractAction implements IAction {
         attach("hasItem",hasItem);
         attach("hasItems",hasItems);
         attach("isVisible",isVisible);
+        attach("hasElementByLabel", hasElementByLabel);
     }
 
     public function isVisible(id:String):String {
@@ -28,6 +31,23 @@ public class ComponentAction extends AbstractAction implements IAction {
         } else {
             return Errors.OBJECT_NOT_FOUND;
         }
+    }
+
+    public function hasElementByLabel(id:String, label:String):String {
+        var child:Object = parser.getElementById(id);
+        if(child) {
+            if(child.hasOwnProperty("dataProvider")) {
+                for each (var item:Object in child.dataProvider) {
+                    if(child.itemToLabel(item) == label) {
+                        return "true";
+                    }
+                }
+                return "false";
+            }
+        } else {
+            return Errors.OBJECT_NOT_FOUND;
+        }
+        return Errors.OBJECT_NOT_COMPATIBLE;
     }
 
     public function hasItems(id:String):String {

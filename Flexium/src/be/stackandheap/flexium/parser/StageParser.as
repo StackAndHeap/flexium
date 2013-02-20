@@ -25,9 +25,10 @@ public class StageParser {
     public function getElementById(id:String):Object {
         if(_popupElements[id]) {
             return _popupElements[id];
-        }
-        if(_elements[id]) {
-            return _elements[id];
+        } else {
+            if(_elements[id]) {
+                return _elements[id];
+            }
         }
         throw new Error("Element not found on stage :'"+id+"'");
     }
