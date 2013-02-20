@@ -1,10 +1,11 @@
 package be.stackandheap.flexium {
 
 import be.stackandheap.flexium.actions.Actions;
-import be.stackandheap.flexium.parser.AppParser;
+import be.stackandheap.flexium.parser.StageParser;
 
 import flash.display.Sprite;
 import flash.external.ExternalInterface;
+import flash.system.Security;
 
 import mx.events.FlexEvent;
 
@@ -12,7 +13,7 @@ import mx.events.FlexEvent;
 public class Flexium extends Sprite {
     private static var flexium:Flexium;
     public static var application:Object;
-    public var appParser:AppParser;
+    public var stageParser:StageParser;
     private var _actions:Actions;
 
     public function Flexium(app:Object) {
@@ -28,10 +29,11 @@ public class Flexium extends Sprite {
     }
 
     private function applicationCompleteHandler(event:FlexEvent):void {
+        Security.allowDomain("*");
         application.removeEventListener(FlexEvent.APPLICATION_COMPLETE, applicationCompleteHandler);
-        appParser = new AppParser(application.getChildAt(0));
+        stageParser = new StageParser();
         injectJavaScript();
-        _actions = new Actions(appParser);
+        _actions = new Actions(stageParser);
     }
 
     private static function injectJavaScript():void {

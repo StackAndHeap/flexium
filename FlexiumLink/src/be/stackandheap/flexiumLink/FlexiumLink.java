@@ -52,6 +52,23 @@ public class FlexiumLink extends FlashSelenium {
     }
 
     /**
+     * Clicks on an object inside of a popup.
+     * This function takes into account the delay() and isReady() methods.
+     *
+     * @param objectId String
+     * @return Boolean
+     * @throws Exception
+     */
+    public Boolean clickInPopup(String objectId) throws Exception {
+        delay();
+        if(isReady()) {
+            String result = call("clickInPopup", objectId);
+            return checkResult(result);
+        }
+        return false;
+    }
+
+    /**
      * Simulates a double click on a Spark Datagrid with objectId as id, on the item with itemLabel as label and
      * in the column with headerLabel as headerLabel. This function takes into account the delay() and isReady() methods.
      *

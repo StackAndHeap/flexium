@@ -42,13 +42,14 @@ public class DemoAppTest {
     public void basicTests() throws Exception {
         flexSelenium.type("textInput", "TEST");
         flexSelenium.click("button");
-        flexSelenium.closeAlertByLabel("OK");
-        Assert.assertTrue(flexSelenium.isVisible("button"));
-        Assert.assertFalse(flexSelenium.isVisible("invisibleButton"));
-        flexSelenium.select("list", "B");
-        Assert.assertTrue(flexSelenium.hasItems("datagrid"));
-        flexSelenium.dataGridDoubleClick("datagrid", "ID", "1");
-        Assert.assertTrue(flexSelenium.alertVisible());
+//        flexSelenium.clickInPopup("closeBtn");
+//        flexSelenium.closeAlertByLabel("OK");
+//        Assert.assertTrue(flexSelenium.isVisible("button"));
+//        Assert.assertFalse(flexSelenium.isVisible("invisibleButton"));
+//        flexSelenium.select("list", "B");
+//        Assert.assertTrue(flexSelenium.hasItems("datagrid"));
+//        flexSelenium.dataGridDoubleClick("datagrid", "ID", "1");
+//        Assert.assertTrue(flexSelenium.alertVisible());
     }
 
 

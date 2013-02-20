@@ -1,13 +1,11 @@
 package be.stackandheap.flexium.actions {
-import be.stackandheap.flexium.parser.AppParser;
+import be.stackandheap.flexium.parser.StageParser;
 import be.stackandheap.flexium.utils.Errors;
-
-import mx.controls.Alert;
 
 import spark.events.TextOperationEvent;
 
 public class KeyboardAction extends AbstractAction implements IAction {
-    public function KeyboardAction(parser:AppParser) {
+    public function KeyboardAction(parser:StageParser) {
         super(parser);
     }
 
@@ -17,7 +15,7 @@ public class KeyboardAction extends AbstractAction implements IAction {
 
     public function doFlexType(id:String, args:String):String
     {
-        var child:Object = parser.getElement(id);
+        var child:Object = parser.getElementById(id);
         if(child == null)
         {
             return Errors.OBJECT_NOT_FOUND;

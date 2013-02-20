@@ -1,5 +1,5 @@
 package be.stackandheap.flexium.actions {
-import be.stackandheap.flexium.parser.AppParser;
+import be.stackandheap.flexium.parser.StageParser;
 import be.stackandheap.flexium.utils.Errors;
 import be.stackandheap.flexium.utils.References;
 import be.stackandheap.flexium.utils.Utils;
@@ -7,7 +7,7 @@ import be.stackandheap.flexium.utils.Utils;
 import spark.components.List;
 
 public class ComponentAction extends AbstractAction implements IAction {
-    public function ComponentAction(parser:AppParser) {
+    public function ComponentAction(parser:StageParser) {
         super(parser);
     }
 
@@ -18,7 +18,7 @@ public class ComponentAction extends AbstractAction implements IAction {
     }
 
     public function isVisible(id:String):String {
-        var child:Object = parser.getElement(id);
+        var child:Object = parser.getElementById(id);
         if(child) {
             if(child.hasOwnProperty("visible")) {
                 return child.visible;
@@ -31,7 +31,7 @@ public class ComponentAction extends AbstractAction implements IAction {
     }
 
     public function hasItems(id:String):String {
-        var child:Object = parser.getElement(id);
+        var child:Object = parser.getElementById(id);
         if(child) {
             if(child.hasOwnProperty("dataProvider")) {
                 if(child.dataProvider && child.dataProvider.length > 0) {
@@ -44,7 +44,7 @@ public class ComponentAction extends AbstractAction implements IAction {
     }
 
     public function hasItem(id:String, label:String):String {
-        var child:Object = parser.getElement(id);
+        var child:Object = parser.getElementById(id);
         if (Utils.isA(child, References.LIST_DESCRIPTION)) {
             return sparkListHasItem(child as List, label);
         }

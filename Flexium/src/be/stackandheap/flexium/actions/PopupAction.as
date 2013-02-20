@@ -1,5 +1,5 @@
 package be.stackandheap.flexium.actions {
-import be.stackandheap.flexium.parser.AppParser;
+import be.stackandheap.flexium.parser.StageParser;
 
 import flash.events.MouseEvent;
 
@@ -12,7 +12,7 @@ import mx.core.mx_internal;
 use namespace mx_internal;
 
 public class PopupAction extends AbstractAction implements IAction {
-    public function PopupAction(parser:AppParser) {
+    public function PopupAction(parser:StageParser) {
         super(parser);
     }
 

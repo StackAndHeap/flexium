@@ -3,6 +3,7 @@
     <fx:Script><![CDATA[
         import mx.controls.Alert;
         import mx.events.FlexEvent;
+        import mx.managers.PopUpManager;
 
         import spark.events.GridEvent;
 
@@ -18,8 +19,9 @@
             button.label = textInput.text;
         }
 
-        private static function showAlert():void {
-            Alert.show('Hello, world', 'hey');
+        private function showAlert():void {
+//            Alert.show('Hello, world', 'hey');
+            PopUpManager.createPopUp(this ,TestPopup, false);
         }
 
         private function list_changeHandler(event:IndexChangeEvent):void {

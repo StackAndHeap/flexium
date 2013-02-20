@@ -1,17 +1,15 @@
 package be.stackandheap.flexium.actions {
-import be.stackandheap.flexium.parser.AppParser;
-
-import mx.controls.Alert;
+import be.stackandheap.flexium.parser.StageParser;
 
 public class Actions {
     private var actionClasses:Array;
 
-    public function Actions(parser:AppParser) {
+    public function Actions(parser:StageParser) {
         addActions(parser);
         attachActions();
     }
 
-    private function addActions(parser:AppParser):void {
+    private function addActions(parser:StageParser):void {
         actionClasses = [];
         actionClasses.push(new MouseAction(parser));
         actionClasses.push(new KeyboardAction(parser));

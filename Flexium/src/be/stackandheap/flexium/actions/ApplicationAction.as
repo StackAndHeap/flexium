@@ -1,10 +1,10 @@
 package be.stackandheap.flexium.actions {
-import be.stackandheap.flexium.parser.AppParser;
+import be.stackandheap.flexium.parser.StageParser;
 
 import mx.managers.CursorManager;
 
 public class ApplicationAction extends AbstractAction implements IAction {
-    public function ApplicationAction(parser:AppParser) {
+    public function ApplicationAction(parser:StageParser) {
         super(parser);
     }
 
