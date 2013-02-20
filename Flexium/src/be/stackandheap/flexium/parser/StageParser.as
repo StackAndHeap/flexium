@@ -39,8 +39,9 @@ public class StageParser {
     public function addElement(id:String, object:Object):void {
         if(isObjectInPopup(object)) {
             _popupElements[id] = object;
+        } else {
+            _elements[id] = object;
         }
-        _elements[id] = object;
 
     }
 
@@ -59,8 +60,11 @@ public class StageParser {
      * @private
      */
     public function removeElement(id:String):void {
-        _popupElements[id]=null;
-        _elements[id] = null;
+        if(_popupElements[id]) {
+            _popupElements[id]=null;
+        } else {
+            _elements[id] = null;
+        }
     }
 }
 }
