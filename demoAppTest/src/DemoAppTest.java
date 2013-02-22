@@ -50,6 +50,7 @@ public class DemoAppTest {
 //        flexSelenium.select("list", "B");
 //        Assert.assertTrue(flexSelenium.hasItems("datagrid"));
 //        flexSelenium.dataGridDoubleClick("datagrid", "ID", "1");
+        flexSelenium.dataGridDoubleClickRow("datagrid", 1);
 //        Assert.assertTrue(flexSelenium.alertVisible());
     }
 

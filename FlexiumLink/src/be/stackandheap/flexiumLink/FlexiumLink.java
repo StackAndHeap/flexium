@@ -89,6 +89,25 @@ public class FlexiumLink extends FlashSelenium {
     }
 
     /**
+     * Simulates a double click on a Spark Datagrid with objectId as id, on the row with the given rowIndex. The rowIndex is 0-based.
+     * This function takes into account the delay() and isReady() methods.
+     *
+     * @param objectId String
+     * @param rowIndex int
+     * @return Boolean
+     * @throws Exception
+     */
+    public Boolean dataGridDoubleClickRow(String objectId, int rowIndex) throws Exception {
+        delay();
+        if(isReady()) {
+            String result = call("doFlexDoubleClick", objectId, ""+rowIndex);
+            System.out.println(result);
+            return checkResult(result);
+        }
+        return false;
+    }
+
+    /**
      * Selects an item in an ActionScript Object. This function takes into account the delay() and isReady() methods.
      *
      * @param objectId String

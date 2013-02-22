@@ -125,6 +125,24 @@ public class MouseAction extends AbstractAction implements IAction {
     }
 
     private static function doubleClickItemInDataGrid(grid:DataGrid, args:String):String {
+        if(args.indexOf("||") > 0) {
+            return doubleClickItemInDataGridByLabel(grid,  args);
+        } else {
+            return doubleClickItemInDataGridById(grid, args);
+        }
+    }
+
+    private static function doubleClickItemInDataGridById(grid:DataGrid, args:String):String {
+        var item:Object = grid.dataProvider.getItemAt(int(args));
+
+        if(!item) {
+            return Errors.ITEM_NOT_FOUND;
+        }
+
+        return selectItemInGrid(grid, item);
+    }
+
+    private static function doubleClickItemInDataGridByLabel(grid:DataGrid, args:String):String {
         var argsArray:Array = args.split("||");
         var colHeader:String = argsArray[0];
         var itemLabel:String = argsArray[1];
@@ -140,16 +158,22 @@ public class MouseAction extends AbstractAction implements IAction {
         if (selectedColumn) {
             for each (var item:Object in grid.dataProvider) {
                 if (selectedColumn.itemToLabel(item) == itemLabel) {
-                    grid.setSelectedIndex(grid.dataProvider.getItemIndex(item));
-                    var event:GridEvent = new GridEvent(GridEvent.GRID_DOUBLE_CLICK);
-                    event.item = item;
-                    event.column = selectedColumn;
-                    event.columnIndex = grid.columns.getItemIndex(selectedColumn);
-                    return String(grid.dispatchEvent(event));
+                    return selectItemInGrid(grid, item, selectedColumn);
                 }
             }
         }
         return Errors.OBJECT_NOT_COMPATIBLE;
+    }
+
+    private static function selectItemInGrid(grid:DataGrid, item:Object, column:GridColumn=null):String {
+        grid.setSelectedIndex(grid.dataProvider.getItemIndex(item));
+        var event:GridEvent = new GridEvent(GridEvent.GRID_DOUBLE_CLICK);
+        event.item = item;
+        if(column) {
+            event.column = column;
+            event.columnIndex = grid.columns.getItemIndex(column);
+        }
+        return String(grid.dispatchEvent(event));
     }
 
 }
