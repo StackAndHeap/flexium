@@ -14,12 +14,18 @@ public class EventDispatchingObjectProcessor implements IStageObjectProcessor, I
     }
 
     public function process(displayObject:DisplayObject):DisplayObject {
-        _stageParser.addElement((displayObject as UIComponent).id, displayObject);
+        if(displayObject.hasOwnProperty("id")) {
+            _stageParser.addElement((displayObject as UIComponent).id, displayObject);
+        }
+        _stageParser.insertInTree(displayObject);
         return displayObject;
     }
 
     public function destroy(displayObject:DisplayObject):DisplayObject {
-        _stageParser.removeElement((displayObject as UIComponent).id);
+        if(displayObject.hasOwnProperty("id")) {
+            _stageParser.removeElement((displayObject as UIComponent).id);
+        }
+        _stageParser.removeFromTree(displayObject);
         return displayObject;
     }
 }

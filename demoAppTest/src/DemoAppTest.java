@@ -41,7 +41,8 @@ public class DemoAppTest {
     @Test
     public void basicTests() throws Exception {
         flexSelenium.type("textInput", "TEST");
-        flexSelenium.click("button");
+//        flexSelenium.click("button");
+        flexSelenium.click("checkBox");
 //        flexSelenium.clickInPopup("closeBtn");
 //        flexSelenium.closeAlertByLabel("OK");
 //        Assert.assertTrue(flexSelenium.isVisible("button"));

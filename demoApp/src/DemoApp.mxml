@@ -67,6 +67,8 @@
 
         <s:TextInput id="textInput" visible="true" enabled="true" change="textInput_changeHandler(event)" editable="true"/>
 
+        <s:CheckBox id="checkBox" label="Checkbox"/>
+
         <s:List id="list" change="list_changeHandler(event)">
             <s:dataProvider>
                 <s:ArrayCollection>
