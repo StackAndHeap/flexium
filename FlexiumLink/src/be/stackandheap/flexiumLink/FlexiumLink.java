@@ -159,6 +159,23 @@ public class FlexiumLink extends FlashSelenium {
     }
 
     /**
+     * Types the value into the value-property of the object. This function takes into account the delay() and isReady() methods.
+     *
+     * @param objectId String
+     * @param value String
+     * @return Boolean
+     * @throws Exception
+     */
+    public Boolean setValue(String objectId, String value) throws Exception {
+        delay();
+        if(isReady()) {
+            String result = call("setFlexValue", objectId, value);
+            return checkResult(result);
+        }
+        return false;
+    }
+
+    /**
      * Checks if the object is visible in the application. This function takes into account the delay() and isReady() methods.
      *
      * @param objectId String
