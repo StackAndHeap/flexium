@@ -4,6 +4,12 @@ Flexium API - Automated testing for [Apache Flex](http://flex.apache.org) and Se
 Flexium is a tool used for building automated [Selenium](http://seleniumhq.org/) tests.<br/>
 Flexium is a work in progress, only having basic functionality (yet).
 
+What's next?
+- Adding more functionality.
+- Implement an objectExplorer to easily find components in your application.
+- Improve communication between JAVA and Flex. (implementing objects, no more strings)
+- Improve Error handling.
+
 How does it work?
 =======
 
