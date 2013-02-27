@@ -85,8 +85,20 @@ public class MouseAction extends AbstractAction implements IAction {
         return Errors.OBJECT_NOT_COMPATIBLE;
     }
 
-    public static function clickInPopup(id:String):String {
-        return "true";
+    public function clickInPopup(id:String):String {
+        var child:Object = parser.getPopupElementById(id);
+
+        if(!child) {
+            return Errors.OBJECT_NOT_FOUND;
+        }
+
+        // Checkbox
+        if(child is CheckBox) {
+            (child as CheckBox).selected = !((child as CheckBox).selected);
+            return String(child.dispatchEvent(new Event(Event.CHANGE)));
+        }
+
+        return String(child.dispatchEvent(new MouseEvent(MouseEvent.CLICK)));
     }
 
     private static function clickSparkTree(tree:Tree, selectItemLabel:String):String {

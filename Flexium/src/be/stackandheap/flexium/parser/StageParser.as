@@ -33,6 +33,13 @@ public class StageParser {
         _registry.initialize();
     }
 
+    public function getPopupElementById(id:String):Object {
+        if(_popupElements[id]) {
+            return _popupElements[id];
+        }
+        throw new Error("Element not found on stage :'"+id+"'");
+    }
+
     public function getElementById(id:String):Object {
         if(_popupElements[id]) {
             return _popupElements[id];
