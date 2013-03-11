@@ -5,7 +5,7 @@ Flexium is a tool used for building automated [Selenium](http://seleniumhq.org/)
 Flexium is a work in progress, only having basic functionality (yet).
 
 What's next?
-- Adding more functionality.
+- Adding more functionality - extended datagroup support.
 - Implement an objectExplorer to easily find components in your application.
 - Improve communication between JAVA and Flex. (implementing objects, no more strings)
 - Improve Error handling.
